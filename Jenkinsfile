@@ -1,17 +1,17 @@
 pipeline {
-	agent any
+    agent any
 
     environment{
-		AWS_REGION = 'ap-northeast-1'
+        AWS_REGION = 'ap-northeast-1'
         IMAGE_NAME = 'cryptory-gateway'
         ECR_REGISTRY = '050314037804.dkr.ecr.ap-northeast-1.amazonaws.com'
         ECR_REPO = "${ECR_REGISTRY}/${IMAGE_NAME}"
     }
 
     stages {
-		stage('Checkout') {  // 1️⃣ GitHub에서 코드 가져오기
+        stage('Checkout') {  // 1️⃣ GitHub에서 코드 가져오기
             steps {
-			git branch: 'main', url: 'https://github.com/lgcns-2nd-project-Ix4/Cryptory-Gateway.git/'
+                git branch: 'main', url: 'https://github.com/lgcns-2nd-project-Ix4/Cryptory-Gateway.git'
             }
         }
 
@@ -73,7 +73,7 @@ pipeline {
                                             docker pull $ECR_REPO:latest
                                             docker stop $IMAGE_NAME || true
                                             docker rm $IMAGE_NAME || true
-                                            docker run -d --name $IMAGE_NAME -p 8761:8761 \\
+                                            docker run -d --name $IMAGE_NAME -p 8080:8080 \\
                                                 -e CONFIG_SERVER_URL=$CONFIG_SERVER_URL \\
                                                 -e RABBITMQ_HOST=$RABBITMQ_HOST \\
                                                 -e RABBITMQ_PORT=$RABBITMQ_PORT \\
@@ -89,7 +89,7 @@ pipeline {
                                 ],
                             usePromotionTimestamp: false,
                             useWorkspaceInPromotion: false,
-                            verbose: false) // verbose옵션을 키면 쉘의 출력이 표시됨.
+                            verbose: false) // verbose옵션으로 쉘 출력이 표시됨.
                         ]
                     )
                 }
