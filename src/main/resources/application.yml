@@ -2,9 +2,9 @@ spring:
   application:
     name: gateway
   profiles:
-    active: local
+    active: docker
   config:
-    import: "optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888}"
+    import: "optional:configserver:${CONFIG_SERVER_URL}"
   cloud:
     config:
       name: gateway
