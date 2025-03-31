@@ -79,6 +79,7 @@ pipeline {
                                                 -e RABBITMQ_PORT=$RABBITMQ_PORT \\
                                                 -e RABBITMQ_USERNAME=$RABBITMQ_USERNAME \\
                                                 -e RABBITMQ_PASSWORD=$RABBITMQ_PASSWORD \\
+                                                -e SPRING_PROFILE_ACTIVE=docker \\
                                                 -e EUREKA_URL=$EUREKA_URL \\
                                                 $ECR_REPO:latest
                                             echo "Deploy successful"
