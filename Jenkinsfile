@@ -61,7 +61,7 @@ pipeline {
 					sshPublisher(
                         publishers: [
                             sshPublisherDesc(
-                                configName: 'Outer-Server',
+                                configName: 'Inner-Server',
                                 transfers: [
                                     sshTransfer(
                                         cleanRemote: false,
